@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<ruleset name="CustomStandards">
+	<config name="php_version" value="80100" />
+	<config name="minimum_supported_wp_version" value="6.7" />
+	<config name="testVersion" value="8.1-"/>
+
+	<arg name="extensions" value="php" />
+
+	<file>./mach.php</file>
+	<file>./inc/</file>
+
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>build/*</exclude-pattern>
+	<exclude-pattern>node_modules/*</exclude-pattern>
+
+	<rule ref="WordPress-Core">
+		<exclude name="Squiz.Commenting.FileComment.Missing" />
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+	</rule>
+	<rule ref="WordPress-Docs" />
+	<rule ref="WordPress-Extra" />
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="mach" />
+				<element value="default" />
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress-VIP-Go">
+		<exclude name="WordPressVIPMinimum.JS" />
+	</rule>
+
+	<rule ref="PHPCompatibilityWP" />
+</ruleset>

@@ -1,0 +1,64 @@
+{
+	"name": "mach",
+	"version": "1.0.0",
+	"description": "A plugin to optimize site performance by conditionally deferring the loading of CSS styles.",
+	"author": "Utsav Ladani",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"mach",
+		"performance",
+		"style",
+		"css",
+		"wordpress",
+		"plugin",
+		"core web vitals"
+	],
+	"homepage": "https://github.com/Utsav-Ladani/mach",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Utsav-Ladani/mach.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Utsav-Ladani/mach/issues"
+	},
+	"files": [
+		"build/",
+		"includes/",
+		"vendor/",
+		"mach.php",
+		"composer.json"
+	],
+	"dependencies": {
+		"classnames": "^2.5.1",
+		"tailwindcss": "^4.1.18"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4.1.18",
+		"@typescript-eslint/eslint-plugin": "^8.53.0",
+		"@wordpress/scripts": "^31.6.0",
+		"clean-webpack-plugin": "^4.0.0",
+		"eslint-plugin-jest": "^29.12.1",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
+		"postcss": "^8.5.6",
+		"postcss-loader": "^8.2.0",
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0"
+	},
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "NODE_ENV=development wp-scripts start",
+		"start:hot": "NODE_ENV=development wp-scripts start --hot",
+		"format": "wp-scripts format",
+		"lint": "pnpm run --parallel \"/^lint:.*/\"",
+		"lint:js": "wp-scripts lint-js",
+		"lint:style": "wp-scripts lint-style --allow-empty-input",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"lint:php": "composer run lint:php",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"release": "npm run build && composer install --no-dev --optimize-autoloader && npm run plugin-zip && composer install"
+	},
+	"packageManager": "pnpm@11.0.0-dev.1005+sha512.91f84a392eea348ea4852a182912d2520273a4336f933b78cc44bc931eb999923c097e9433a9b355adc1f725725ea99082fc9f032a559df832632e764c92c798"
+}

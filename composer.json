@@ -1,0 +1,31 @@
+{
+	"name": "mach/mach",
+	"type": "wordpress-plugin",
+	"description": "A plugin to optimize site performance by conditionally deferring the loading of CSS styles.",
+	"license": "GPL-2.0-or-later",
+	"autoload": {
+		"psr-4": {
+			"Mach\\": "inc/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Utsav Ladani",
+			"homepage": "https://profile.wordpress.org/utsavladani"
+		}
+	],
+	"scripts": {
+		"lint:php": "phpcs",
+		"lint:php:fix": "phpcbf"
+	},
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^3.3",
+		"automattic/vipwpcs": "^3.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

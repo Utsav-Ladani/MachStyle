@@ -1,0 +1,6 @@
+{
+	"*.{scss,css}": [ "npm run lint:style" ],
+	"*.{js,jsx,ts,tsx}": [ "npm run lint:js" ],
+	"package.json": [ "npm run lint:pkg-json" ],
+	"*.php": [ "composer lint:php" ]
+}
