@@ -74,6 +74,7 @@ class Menu {
 			'MACH_SETTINGS_DATA',
 			array(
 				'availablePostTypes' => array_keys( get_post_types( array( 'public' => true ), 'names' ) ),
+				'siteUrl'            => home_url( '/' ),
 			)
 		);
 

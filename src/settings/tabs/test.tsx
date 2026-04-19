@@ -5,6 +5,7 @@ import { __ } from '@wordpress/i18n';
 import { RulesList } from '@/components/RulesList';
 import { ModalAddRule } from '@/components/ModalAddRule';
 import { RulesetToggle } from '@/components/RulesetToggle';
+import { TestFlightStatus } from '@/components/TestFlightStatus';
 
 export const TestTab = () => {
 	const [ isOpen, setIsOpen ] = useState< boolean >( false );
@@ -18,6 +19,7 @@ export const TestTab = () => {
 					'mach'
 				) }
 			/>
+			<TestFlightStatus />
 			<Flex align="center" justify="space-between" className="mt-8 mb-4">
 				<h2 className="text-xl text-gray-700 m-0">
 					{ __( 'Active Optimization Rules', 'mach' ) }

@@ -7,6 +7,7 @@ namespace Mach;
 use Mach\Traits\Singleton;
 use Mach\Api\Rules;
 use Mach\Api\RuleSetStatus;
+use Mach\Api\TestFlightId;
 
 /**
  * Plugin class to initialize the plugin.
@@ -22,5 +23,6 @@ class Plugin {
 		Menu::get_instance();
 		Rules::get_instance();
 		RuleSetStatus::get_instance();
+		TestFlightId::get_instance();
 	}
 }
