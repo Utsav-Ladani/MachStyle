@@ -43,6 +43,7 @@
 		"@wordpress/dataviews": "^14.1.0",
 		"@wordpress/element": "^6.44.0",
 		"@wordpress/i18n": "^6.17.0",
+		"@wordpress/notices": "^5.44.0",
 		"@wordpress/scripts": "^31.6.0",
 		"clean-webpack-plugin": "^4.0.0",
 		"eslint-plugin-jest": "^29.12.1",

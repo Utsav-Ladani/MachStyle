@@ -1,6 +1,7 @@
 import { createReduxStore, register } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { Rule } from '@/types';
+import { createNotice } from '@/utils/notice';
 
 const STORE_NAME = 'mach/live-ruleset';
 
@@ -44,6 +45,8 @@ const actions = {
 	},
 	async addRule( rule: Omit< Rule, 'id' > ) {
 		try {
+			createNotice( 'Adding rule...', 'info' );
+
 			const newRule = await apiFetch( {
 				method: 'POST',
 				path: '/mach/v1/rules',
@@ -53,13 +56,19 @@ const actions = {
 				},
 			} );
 
+			createNotice( 'Rule added successfully!' );
+
 			return { type: 'ADD_RULE', rule: newRule };
 		} catch {
+			createNotice( 'Failed to add rule', 'error' );
+
 			return { type: 'NONE' };
 		}
 	},
 	async updateRule( rule: Rule ) {
 		try {
+			createNotice( 'Updating rule...', 'info' );
+
 			const updatedRule = await apiFetch( {
 				method: 'PUT',
 				path: '/mach/v1/rules',
@@ -69,13 +78,19 @@ const actions = {
 				},
 			} );
 
+			createNotice( 'Rule updated successfully!' );
+
 			return { type: 'UPDATE_RULE', rule: updatedRule };
 		} catch {
+			createNotice( 'Failed to update rule', 'error' );
+
 			return { type: 'NONE' };
 		}
 	},
 	async deleteRule( ruleId: string ) {
 		try {
+			createNotice( 'Deleting rule...', 'info' );
+
 			const deletedRuleId = await apiFetch( {
 				method: 'DELETE',
 				path: '/mach/v1/rules',
@@ -85,8 +100,12 @@ const actions = {
 				},
 			} );
 
+			createNotice( 'Rule deleted successfully!' );
+
 			return { type: 'DELETE_RULE', id: deletedRuleId };
 		} catch {
+			createNotice( 'Failed to delete rule', 'error' );
+
 			return { type: 'NONE' };
 		}
 	},
@@ -116,6 +135,8 @@ const resolvers = {
 				dispatch.setRules( rules );
 			} catch {
 				dispatch.setRules( [] );
+
+				createNotice( 'Failed to fetch rules', 'error' );
 			}
 		};
 	},

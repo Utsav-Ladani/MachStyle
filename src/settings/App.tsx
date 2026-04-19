@@ -1,4 +1,5 @@
 import { Header } from '@/components/Header';
+import { Notices } from '@/components/Notices';
 import { Tabs } from '@/settings/tabs';
 
 export const App = () => {
@@ -6,6 +7,7 @@ export const App = () => {
 		<div>
 			<Header />
 			<Tabs />
+			<Notices />
 		</div>
 	);
 };
