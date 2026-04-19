@@ -34,7 +34,13 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.18",
+		"@types/react": "^19.2.14",
+		"@types/react-dom": "^19.2.3",
 		"@typescript-eslint/eslint-plugin": "^8.53.0",
+		"@wordpress/components": "^32.6.0",
+		"@wordpress/dataviews": "^14.1.0",
+		"@wordpress/element": "^6.44.0",
+		"@wordpress/i18n": "^6.17.0",
 		"@wordpress/scripts": "^31.6.0",
 		"clean-webpack-plugin": "^4.0.0",
 		"eslint-plugin-jest": "^29.12.1",

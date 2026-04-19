@@ -21,32 +21,18 @@ export default {
 	...defaultConfig,
 	entry: {
 		...defaultConfig.entry,
-		'block-editor': path.resolve(
-			import.meta.dirname,
-			'src/block-editor/index.tsx'
-		),
-		'blocks/conditional-style/index': path.resolve(
-			import.meta.dirname,
-			'src/blocks/conditional-style'
-		),
-		index: path.resolve( import.meta.dirname, 'src/index.tsx' ),
+		settings: path.resolve( import.meta.dirname, 'src/settings/index.tsx' ),
 	},
 	devServer: {
 		devMiddleware: { writeToDisk: true },
 		host: 'localhost',
 		port: 8887,
-		proxy: [
-			{
-				context: [ '/build' ],
-				target: 'http://localhost:10004',
-			},
-		],
 		// allows to access the dev server from any host.
 		allowedHosts: 'all',
 	},
 	// Ignore build directory to avoid infinite webpack compilation loop.
 	watchOptions: {
-		ignored: [ '**/build' ],
+		ignored: [ '**/build', '**/node_modules', '**/vendor' ],
 	},
 	module: {
 		...defaultConfig.module,
@@ -62,6 +48,14 @@ export default {
 				use: [ 'postcss-loader' ],
 			},
 		],
+	},
+	resolve: {
+		...defaultConfig.resolve,
+		extensions: [ '.tsx', '.ts', '.jsx', '.js' ],
+		alias: {
+			...( defaultConfig.resolve?.alias || {} ),
+			'@': path.resolve( process.cwd(), 'src' ),
+		},
 	},
 	plugins: [
 		...plugins,

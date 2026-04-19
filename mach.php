@@ -21,8 +21,12 @@ namespace Mach;
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit();
 
+const BUILD_DIR = __DIR__ . '/build/';
+
 if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	return;
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
+
+Plugin::get_instance();

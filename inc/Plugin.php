@@ -17,5 +17,6 @@ class Plugin {
 	 * Constructor for the Plugin class.
 	 */
 	protected function __construct() {
+		Menu::get_instance();
 	}
 }
