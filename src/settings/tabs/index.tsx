@@ -4,24 +4,25 @@ import { __ } from '@wordpress/i18n';
 import { TabButton } from '@/components/TabButton';
 import { LiveTab } from '@/settings/tabs/live';
 import { TestTab } from '@/settings/tabs/test';
+import { RuleSetId } from '@/types';
+import { RuleSetContext } from '@/context/ruleset';
 
-type TabId = 'live' | 'test';
-
-const tabs: { id: TabId; label: string; component: React.ComponentType }[] = [
-	{
-		id: 'live',
-		label: __( 'Live Settings (Production)', 'mach' ),
-		component: LiveTab,
-	},
-	{
-		id: 'test',
-		label: __( 'Test Flight (Lab)', 'mach' ),
-		component: TestTab,
-	},
-];
+const tabs: { id: RuleSetId; label: string; component: React.ComponentType }[] =
+	[
+		{
+			id: 'live',
+			label: __( 'Live Settings (Production)', 'mach' ),
+			component: LiveTab,
+		},
+		{
+			id: 'test',
+			label: __( 'Test Flight (Lab)', 'mach' ),
+			component: TestTab,
+		},
+	];
 
 export const Tabs = () => {
-	const [ activeTab, setActiveTab ] = useState< TabId >( 'live' );
+	const [ activeTab, setActiveTab ] = useState< RuleSetId >( 'live' );
 
 	const ActiveComponent = tabs.find( ( tab ) => tab.id === activeTab )
 		?.component;
@@ -39,7 +40,9 @@ export const Tabs = () => {
 					</TabButton>
 				) ) }
 			</div>
-			{ ActiveComponent && <ActiveComponent /> }
+			<RuleSetContext.Provider value={ { id: activeTab } }>
+				{ ActiveComponent && <ActiveComponent /> }
+			</RuleSetContext.Provider>
 		</>
 	);
 };

@@ -14,45 +14,17 @@ import { getHumanReadableCondition } from '@/utils/condition';
 import { ModalEditRule } from '@/components/ModalEditRule';
 import { ModalDeleteRule } from '@/components/ModalDeleteRule';
 import type { Rule } from '@/types';
+import { useRuleSetSelect } from '@/hooks/useRuleSetSelect';
 
 export const RulesList = () => {
-	const rules: Rule[] = [
-		{
-			id: 1,
-			condition: { type: 'global' },
-			styleHandles: [ 'handle1', 'handle2' ],
-		},
-		{
-			id: 2,
-			condition: { type: 'post_type_archive', postType: 'post' },
-			styleHandles: [ 'handle3', 'handle4' ],
-		},
-		{
-			id: 3,
-			condition: { type: 'post_type_single', postType: 'product' },
-			styleHandles: [ 'handle5' ],
-		},
-		{
-			id: 4,
-			condition: { type: 'starts_with', value: 'category-' },
-			styleHandles: [ 'handle6', 'handle7' ],
-		},
-		{
-			id: 5,
-			condition: { type: 'ends_with', value: '-archive' },
-			styleHandles: [ 'handle8' ],
-		},
-		{
-			id: 6,
-			condition: { type: 'exact_url', value: '/special-page' },
-			styleHandles: [ 'handle9' ],
-		},
-		{
-			id: 7,
-			condition: { type: 'home_page' },
-			styleHandles: [ 'handle10' ],
-		},
-	];
+	const { rules, isLoading } = useRuleSetSelect(
+		( select: any, rulesetStore: any ) => {
+			return {
+				rules: select( rulesetStore ).getRules(),
+				isLoading: select( rulesetStore ).isResolving( 'getRules' ),
+			};
+		}
+	);
 
 	const [ view, setView ] = useState< View >( {
 		type: 'table',
@@ -101,10 +73,6 @@ export const RulesList = () => {
 					/>
 				);
 			},
-			callback: async ( items: Rule[] ) => {
-				// eslint-disable-next-line no-console
-				console.log( 'Edit action triggered for items:', items );
-			},
 		},
 		{
 			id: 'delete',
@@ -120,10 +88,6 @@ export const RulesList = () => {
 						onDelete={ onActionPerformed }
 					/>
 				);
-			},
-			callback: ( items: Rule[] ) => {
-				// eslint-disable-next-line no-console
-				console.log( 'Delete action triggered for items:', items );
 			},
 		},
 	];
@@ -141,7 +105,7 @@ export const RulesList = () => {
 				data={ data }
 				fields={ fields }
 				view={ view }
-				isLoading={ false }
+				isLoading={ isLoading }
 				onChangeView={ setView }
 				paginationInfo={ paginationInfo }
 				defaultLayouts={ {

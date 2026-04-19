@@ -2,6 +2,7 @@ import { Button, Flex } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import type { Rule } from '@/types';
+import { useRuleSetDispatch } from '@/hooks/useRuleSetDispatch';
 
 type ModalDeleteRuleProps = {
 	rule?: Rule;
@@ -14,8 +15,16 @@ export const ModalDeleteRule = ( {
 	onClose,
 	onDelete,
 }: ModalDeleteRuleProps ) => {
+	const { deleteRule } = useRuleSetDispatch();
+
 	const handleDeleteRule = () => {
-		onDelete?.( rule ? [ rule ] : [] );
+		if ( ! rule ) {
+			onClose?.();
+			return;
+		}
+
+		onDelete?.( [ rule ] );
+		deleteRule( rule.id );
 		onClose?.();
 	};
 

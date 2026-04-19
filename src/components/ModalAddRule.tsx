@@ -12,6 +12,7 @@ import { CONDITION_TYPE_OPTIONS } from '@/constants';
 import type { Condition } from '@/types/condition';
 import { ConditionFields } from '@/components/ConditionFields';
 import { getEmptyCondition, isConditionValid } from '@/utils/condition';
+import { useRuleSetDispatch } from '@/hooks/useRuleSetDispatch';
 
 type ModalAddRuleProps = {
 	isOpen: boolean;
@@ -22,12 +23,20 @@ export const ModalAddRule = ( { isOpen, onClose }: ModalAddRuleProps ) => {
 	const [ condition, setCondition ] = useState< Condition | null >( null );
 	const [ styleHandles, setStyleHandles ] = useState< string[] >( [] );
 
+	const { addRule } = useRuleSetDispatch();
+
 	if ( ! isOpen ) {
 		return null;
 	}
 
 	const handleAddRule = () => {
 		onClose();
+		addRule( {
+			condition: condition as Condition,
+			styleHandles,
+		} );
+		setCondition( null );
+		setStyleHandles( [] );
 	};
 
 	return (

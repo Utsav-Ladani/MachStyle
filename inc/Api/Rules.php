@@ -240,7 +240,17 @@ class Rules {
 	 * @return WP_REST_Response|WP_Error REST response containing all data sources or WP_Error on failure.
 	 */
 	public function get_all(): WP_REST_Response|WP_Error {
-		return rest_ensure_response( array() );
+		return rest_ensure_response(
+			array(
+				array(
+					'id'           => 'rule-1',
+					'condition'    => array(
+						'type' => 'home_page',
+					),
+					'styleHandles' => array( 'handle-1', 'handle-2' ),
+				),
+			) 
+		);
 	}
 
 	/**
@@ -249,7 +259,15 @@ class Rules {
 	 * @return WP_REST_Response|WP_Error REST response containing the added rule or WP_Error on failure.
 	 */
 	public function add(): WP_REST_Response|WP_Error {
-		return rest_ensure_response( array() );
+		return rest_ensure_response(
+			array(
+				'id'           => 'rule-2',
+				'condition'    => array(
+					'type' => 'home_page',
+				),
+				'styleHandles' => array( 'handle-111', 'handle-233' ),
+			) 
+		);
 	}
 
 	/**
@@ -258,7 +276,16 @@ class Rules {
 	 * @return WP_REST_Response|WP_Error REST response containing the updated rule or WP_Error on failure.
 	 */
 	public function update(): WP_REST_Response|WP_Error {
-		return rest_ensure_response( array() );
+		return rest_ensure_response(
+			array(
+				'id'           => 'rule-1',
+				'condition'    => array(
+					'type'  => 'exact_url',
+					'value' => 'specific-page',
+				),
+				'styleHandles' => array( 'handle-1', 'handle-2', 'handle-3' ),
+			) 
+		);
 	}
 
 	/**
@@ -267,6 +294,6 @@ class Rules {
 	 * @return WP_REST_Response|WP_Error REST response confirming deletion or WP_Error on failure.
 	 */
 	public function delete(): WP_REST_Response|WP_Error {
-		return rest_ensure_response( array() );
+		return rest_ensure_response( 'rule-1' );
 	}
 }

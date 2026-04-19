@@ -12,6 +12,7 @@ import type { Condition } from '@/types/condition';
 import { ConditionFields } from '@/components/ConditionFields';
 import { getEmptyCondition, isConditionValid } from '@/utils/condition';
 import type { Rule } from '@/types';
+import { useRuleSetDispatch } from '@/hooks/useRuleSetDispatch';
 
 type ModalEditRuleProps = {
 	rule?: Rule;
@@ -31,14 +32,22 @@ export const ModalEditRule = ( {
 		rule?.styleHandles || []
 	);
 
+	const { updateRule } = useRuleSetDispatch();
+
 	const handleEditRule = () => {
-		onEdit?.( [
-			{
-				id: rule?.id || 0,
-				condition: condition as Condition,
-				styleHandles,
-			},
-		] );
+		if ( ! rule ) {
+			onClose?.();
+			return;
+		}
+
+		const updatedRule: Rule = {
+			id: rule.id,
+			condition: condition as Condition,
+			styleHandles,
+		};
+
+		updateRule( updatedRule );
+		onEdit?.( [ updatedRule ] );
 		onClose?.();
 	};
 

@@ -43,7 +43,7 @@ export const LiveTab = () => {
 				</h2>
 				<Button
 					__next40pxDefaultSize
-					variant="secondary"
+					variant="primary"
 					onClick={ () => setIsOpen( true ) }
 				>
 					{ __( 'Add New Rule', 'mach' ) }
