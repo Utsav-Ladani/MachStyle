@@ -24,5 +24,7 @@ class Plugin {
 		Rules::get_instance();
 		RuleSetStatus::get_instance();
 		TestFlightId::get_instance();
+		Optimization::get_instance();
+		StyleLoader::get_instance();
 	}
 }
