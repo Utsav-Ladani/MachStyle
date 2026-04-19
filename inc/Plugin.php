@@ -20,6 +20,7 @@ class Plugin {
 	 * Constructor for the Plugin class.
 	 */
 	protected function __construct() {
+		AdminMenu::get_instance();
 		Menu::get_instance();
 		Rules::get_instance();
 		RuleSetStatus::get_instance();
