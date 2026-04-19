@@ -7,35 +7,35 @@ export type ConditionType =
 	| 'starts_with'
 	| 'ends_with';
 
-type ConditionGlobal = {
+export type ConditionGlobal = {
 	type: 'global';
 };
 
-type ConditionHomePage = {
+export type ConditionHomePage = {
 	type: 'home_page';
 };
 
-type ConditionPostTypeArchive = {
+export type ConditionPostTypeArchive = {
 	type: 'post_type_archive';
 	postType: string;
 };
 
-type ConditionPostTypeSingle = {
+export type ConditionPostTypeSingle = {
 	type: 'post_type_single';
 	postType: string;
 };
 
-type ConditionExactURL = {
+export type ConditionExactURL = {
 	type: 'exact_url';
 	value: string;
 };
 
-type ConditionStartsWith = {
+export type ConditionStartsWith = {
 	type: 'starts_with';
 	value: string;
 };
 
-type ConditionEndsWith = {
+export type ConditionEndsWith = {
 	type: 'ends_with';
 	value: string;
 };

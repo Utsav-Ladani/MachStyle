@@ -1,4 +1,3 @@
-import { Icon } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
@@ -8,23 +7,13 @@ import {
 	type Field,
 	type View,
 } from '@wordpress/dataviews/wp';
-import type { Condition, ConditionType } from '@/types/condition';
-
-type Rule = {
-	id: number;
-	condition: Condition;
-	styleHandles: string[];
-};
-
-const RULE_LABELS: Record< ConditionType, string > = {
-	global: __( 'Global', 'mach' ),
-	home_page: __( 'Home Page', 'mach' ),
-	post_type_archive: __( 'Post Type Archive', 'mach' ),
-	post_type_single: __( 'Post Type Single', 'mach' ),
-	exact_url: __( 'Exact URL', 'mach' ),
-	starts_with: __( 'URL Starts With', 'mach' ),
-	ends_with: __( 'URL Ends With', 'mach' ),
-};
+import { EmptyRuleList } from '@/components/EmptyRuleList';
+import { StyleHandlesRenderer } from '@/components/StyleHandlesRenderer';
+import { ConditionRenderer } from '@/components/ConditionRenderer';
+import { getHumanReadableCondition } from '@/utils/condition';
+import { ModalEditRule } from '@/components/ModalEditRule';
+import { ModalDeleteRule } from '@/components/ModalDeleteRule';
+import type { Rule } from '@/types';
 
 export const RulesList = () => {
 	const rules: Rule[] = [
@@ -79,33 +68,8 @@ export const RulesList = () => {
 			label: __( 'Condition', 'mach' ),
 			enableGlobalSearch: true,
 			enableSorting: false,
-			getValue: ( args ) => {
-				const condition = args.item.condition;
-
-				if ( ! RULE_LABELS.hasOwnProperty( condition.type ) ) {
-					return __( 'Unknown Condition', 'mach' );
-				}
-
-				if (
-					condition.type === 'global' ||
-					condition.type === 'home_page'
-				) {
-					return RULE_LABELS[ condition.type ];
-				}
-
-				if (
-					condition.type === 'post_type_archive' ||
-					condition.type === 'post_type_single'
-				) {
-					return `${ RULE_LABELS[ condition.type ] }: ${
-						condition.postType
-					}`;
-				}
-
-				return `${ RULE_LABELS[ condition.type ] }: ${
-					condition.value
-				}`;
-			},
+			getValue: ( args ) =>
+				getHumanReadableCondition( args.item.condition ),
 			render: ( { item }: { item: Rule } ) => (
 				<ConditionRenderer condition={ item.condition } />
 			),
@@ -125,6 +89,18 @@ export const RulesList = () => {
 		{
 			id: 'edit',
 			label: __( 'Edit', 'mach' ),
+			modalHeader: () => __( 'Edit Rule', 'mach' ),
+			RenderModal: ( { items, closeModal, onActionPerformed } ) => {
+				const rule = items[ 0 ];
+
+				return (
+					<ModalEditRule
+						rule={ rule }
+						onClose={ closeModal }
+						onEdit={ onActionPerformed }
+					/>
+				);
+			},
 			callback: async ( items: Rule[] ) => {
 				// eslint-disable-next-line no-console
 				console.log( 'Edit action triggered for items:', items );
@@ -133,6 +109,18 @@ export const RulesList = () => {
 		{
 			id: 'delete',
 			label: __( 'Delete', 'mach' ),
+			modalHeader: () => __( 'Delete Rule', 'mach' ),
+			RenderModal: ( { items, closeModal, onActionPerformed } ) => {
+				const rule = items[ 0 ];
+
+				return (
+					<ModalDeleteRule
+						rule={ rule }
+						onClose={ closeModal }
+						onDelete={ onActionPerformed }
+					/>
+				);
+			},
 			callback: ( items: Rule[] ) => {
 				// eslint-disable-next-line no-console
 				console.log( 'Delete action triggered for items:', items );
@@ -161,85 +149,8 @@ export const RulesList = () => {
 				} }
 				config={ { perPageSizes: [ 10, 20 ] } }
 				getItemId={ ( item: Rule ) => item.id.toString() }
-				empty={ <EmptyState /> }
+				empty={ <EmptyRuleList /> }
 			/>
-		</div>
-	);
-};
-
-const EmptyState = () => {
-	return (
-		<div className="text-center py-16">
-			<Icon icon="info" size={ 48 } className="text-gray-400 mb-4" />
-			<h2 className="text-xl text-gray-700 m-0 mb-2">
-				{ __( 'No active optimization rules', 'mach' ) }
-			</h2>
-			<p className="text-gray-500 m-0 mb-6">
-				{ __(
-					'Create rules to conditionally defer CSS loading and improve site performance.',
-					'mach'
-				) }
-			</p>
-		</div>
-	);
-};
-
-const ConditionRenderer = ( { condition }: { condition: Condition } ) => {
-	if ( ! RULE_LABELS.hasOwnProperty( condition.type ) ) {
-		return (
-			<span className="text-xs italic">
-				{ __( 'Unknown Condition', 'mach' ) }
-			</span>
-		);
-	}
-
-	if ( condition.type === 'global' || condition.type === 'home_page' ) {
-		return (
-			<span className="uppercase text-xs">
-				{ RULE_LABELS[ condition.type ] }
-			</span>
-		);
-	}
-
-	if (
-		condition.type === 'post_type_archive' ||
-		condition.type === 'post_type_single'
-	) {
-		return (
-			<span>
-				<span>{ RULE_LABELS[ condition.type ] }: </span>
-				<span className="text-md bg-gray-100 border border-gray-300 mx-1 px-2 py-1 rounded">
-					{ condition.postType }
-				</span>
-			</span>
-		);
-	}
-
-	return (
-		<span>
-			<span>{ RULE_LABELS[ condition.type ] }: </span>
-			<span className="text-md bg-gray-100 border border-gray-300 mx-1 px-2 py-1 rounded">
-				{ condition.value }
-			</span>
-		</span>
-	);
-};
-
-const StyleHandlesRenderer = ( {
-	styleHandles,
-}: {
-	styleHandles: string[];
-} ) => {
-	return (
-		<div>
-			{ styleHandles.map( ( handle ) => (
-				<span
-					key={ handle }
-					className="text-md text-[var(--wp-admin-theme-color)] border border-[var(--wp-admin-theme-color)] mx-1 px-2 py-1 rounded"
-				>
-					{ handle }
-				</span>
-			) ) }
 		</div>
 	);
 };

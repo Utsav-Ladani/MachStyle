@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace Mach;
 
 use Mach\Traits\Singleton;
+use Mach\Api\Rules;
 
 /**
  * Plugin class to initialize the plugin.
@@ -18,5 +19,6 @@ class Plugin {
 	 */
 	protected function __construct() {
 		Menu::get_instance();
+		Rules::get_instance();
 	}
 }

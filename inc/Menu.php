@@ -69,6 +69,14 @@ class Menu {
 			true
 		);
 
+		wp_localize_script(
+			'mach-settings-script',
+			'MACH_SETTINGS_DATA',
+			array(
+				'availablePostTypes' => array_keys( get_post_types( array( 'public' => true ), 'names' ) ),
+			)
+		);
+
 		wp_enqueue_style(
 			'mach-settings-style',
 			plugins_url( 'build/settings.css', BUILD_DIR ),
