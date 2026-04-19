@@ -6,15 +6,19 @@ import { createNotice } from '@/utils/notice';
 const STORE_NAME = 'mach/live-ruleset';
 
 type State = {
+	enabled: boolean;
 	rules: Rule[];
 };
 
 const DEFAULT_STATE: State = {
+	enabled: false,
 	rules: [],
 };
 
 const reducer = ( state = DEFAULT_STATE, action: any ) => {
 	switch ( action.type ) {
+		case 'SET_ENABLED':
+			return { ...state, enabled: action.enabled };
 		case 'SET_RULES':
 			return { ...state, rules: action.rules };
 		case 'ADD_RULE':
@@ -40,8 +44,29 @@ const reducer = ( state = DEFAULT_STATE, action: any ) => {
 };
 
 const actions = {
+	setEnabled( enabled: boolean ) {
+		return { type: 'SET_ENABLED', enabled };
+	},
 	setRules( rules: Rule[] ) {
 		return { type: 'SET_RULES', rules };
+	},
+	async persistEnabled( enabled: boolean, previousEnabled: boolean ) {
+		try {
+			const newEnabled = await apiFetch( {
+				method: 'POST',
+				path: '/mach/v1/ruleset-status',
+				data: {
+					ruleset_type: 'live',
+					enabled,
+				},
+			} );
+
+			return { type: 'SET_ENABLED', enabled: newEnabled };
+		} catch {
+			createNotice( 'Failed to update ruleset status', 'error' );
+
+			return { type: 'SET_ENABLED', enabled: previousEnabled };
+		}
 	},
 	async addRule( rule: Omit< Rule, 'id' > ) {
 		try {
@@ -112,12 +137,38 @@ const actions = {
 };
 
 const selectors = {
+	isEnabled( state: State ) {
+		return state.enabled;
+	},
 	getRules( state: State ) {
 		return state.rules;
 	},
 };
 
 const resolvers = {
+	isEnabled() {
+		return async ( { dispatch }: { dispatch: any } ) => {
+			try {
+				const urlSearchParams = new URLSearchParams( {
+					ruleset_type: 'live',
+				} );
+
+				const path = `/mach/v1/ruleset-status?${ urlSearchParams.toString() }`;
+
+				const enabled = await apiFetch( {
+					method: 'GET',
+					path,
+					cache: 'no-cache',
+				} );
+
+				dispatch.setEnabled( enabled );
+			} catch {
+				dispatch.setEnabled( false );
+
+				createNotice( 'Failed to fetch ruleset status', 'error' );
+			}
+		};
+	},
 	getRules() {
 		return async ( { dispatch }: { dispatch: any } ) => {
 			try {
@@ -130,6 +181,7 @@ const resolvers = {
 				const rules = await apiFetch( {
 					method: 'GET',
 					path,
+					cache: 'no-cache',
 				} );
 
 				dispatch.setRules( rules );

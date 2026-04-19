@@ -6,6 +6,7 @@ namespace Mach;
 
 use Mach\Traits\Singleton;
 use Mach\Api\Rules;
+use Mach\Api\RuleSetStatus;
 
 /**
  * Plugin class to initialize the plugin.
@@ -20,5 +21,6 @@ class Plugin {
 	protected function __construct() {
 		Menu::get_instance();
 		Rules::get_instance();
+		RuleSetStatus::get_instance();
 	}
 }

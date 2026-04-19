@@ -1,0 +1,96 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Mach\Api;
+
+use Mach\Traits\Singleton;
+
+use WP_Error;
+use WP_REST_Response;
+use WP_REST_Server;
+
+/**
+ * RuleSetStatus class to handle REST API endpoints for ruleset status.
+ */
+class RuleSetStatus {
+
+	use Singleton;
+
+	const ROUTE_NAMESPACE      = 'mach/v1';
+	const ROUTE_RULESET_STATUS = '/ruleset-status';
+
+	/**
+	 * Constructor for the RuleSetStatus class.
+	 */
+	protected function __construct() {
+		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
+	}
+
+	/**
+	 * Register REST API routes.
+	 */
+	public function register_routes(): void {
+		register_rest_route(
+			self::ROUTE_NAMESPACE,
+			self::ROUTE_RULESET_STATUS,
+			array(
+				array(
+					'methods'             => WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get' ),
+					'permission_callback' => array( $this, 'permission_check' ),
+					'args'                => array(
+						'ruleset_type' => array(
+							'required' => true,
+							'type'     => 'string',
+							'enum'     => array( 'live', 'test' ),
+						),
+					),
+				),
+				array(
+					'methods'             => WP_REST_Server::EDITABLE,
+					'callback'            => array( $this, 'update' ),
+					'permission_callback' => array( $this, 'permission_check' ),
+					'args'                => array(
+						'ruleset_type' => array(
+							'required' => true,
+							'type'     => 'string',
+							'enum'     => array( 'live', 'test' ),
+						),
+						'enabled'      => array(
+							'required' => true,
+							'type'     => 'boolean',
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
+	 * Permission check for REST API endpoints.
+	 *
+	 * @return bool True if the user has permission, false otherwise.
+	 */
+	public function permission_check(): bool {
+		return current_user_can( 'manage_options' );
+	}
+
+	/**
+	 * Get the status of the ruleset.
+	 *
+	 * @return WP_REST_Response|WP_Error REST response containing the ruleset status or WP_Error on failure.
+	 */
+	public function get(): WP_REST_Response|WP_Error {
+		return rest_ensure_response( true );
+	}
+
+	/**
+	 * Update the status of the ruleset.
+	 *
+	 * @return WP_REST_Response|WP_Error REST response indicating success or failure.
+	 */
+	public function update(): WP_REST_Response|WP_Error {
+		return rest_ensure_response( false );
+	}
+}

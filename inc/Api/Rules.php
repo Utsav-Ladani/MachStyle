@@ -235,9 +235,9 @@ class Rules {
 	}
 
 	/**
-	 * Get all data sources.
+	 * Get all data rules.
 	 *
-	 * @return WP_REST_Response|WP_Error REST response containing all data sources or WP_Error on failure.
+	 * @return WP_REST_Response|WP_Error REST response containing all data rules or WP_Error on failure.
 	 */
 	public function get_all(): WP_REST_Response|WP_Error {
 		return rest_ensure_response(
@@ -249,7 +249,7 @@ class Rules {
 					),
 					'styleHandles' => array( 'handle-1', 'handle-2' ),
 				),
-			) 
+			)
 		);
 	}
 
@@ -266,7 +266,7 @@ class Rules {
 					'type' => 'home_page',
 				),
 				'styleHandles' => array( 'handle-111', 'handle-233' ),
-			) 
+			)
 		);
 	}
 
@@ -284,7 +284,7 @@ class Rules {
 					'value' => 'specific-page',
 				),
 				'styleHandles' => array( 'handle-1', 'handle-2', 'handle-3' ),
-			) 
+			)
 		);
 	}
 
