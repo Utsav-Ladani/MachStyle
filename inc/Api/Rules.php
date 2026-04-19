@@ -7,6 +7,7 @@ namespace Mach\Api;
 use Mach\Traits\Singleton;
 
 use WP_Error;
+use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
 
@@ -17,8 +18,9 @@ class Rules {
 
 	use Singleton;
 
-	const ROUTE_NAMESPACE = 'mach/v1';
-	const ROUTE_RULES     = '/rules';
+	const ROUTE_NAMESPACE   = 'mach/v1';
+	const ROUTE_RULES       = '/rules';
+	const OPTION_KEY_PREFIX = 'mach_rule_';
 
 	/**
 	 * Constructor for the Rules class.
@@ -96,12 +98,12 @@ class Rules {
 										),
 										array(
 											'properties' => array(
-												'type'     => array(
+												'type'  => array(
 													'required' => true,
 													'type' => 'string',
 													'enum' => array( 'exact_url', 'starts_with', 'ends_with' ),
 												),
-												'postType' => array(
+												'value' => array(
 													'required' => true,
 													'type' => 'string',
 													'pattern' => '^[a-zA-Z0-9/_-]+$',
@@ -177,12 +179,12 @@ class Rules {
 										),
 										array(
 											'properties' => array(
-												'type'     => array(
+												'type'  => array(
 													'required' => true,
 													'type' => 'string',
 													'enum' => array( 'exact_url', 'starts_with', 'ends_with' ),
 												),
-												'postType' => array(
+												'value' => array(
 													'required' => true,
 													'type' => 'string',
 													'pattern' => '^[a-zA-Z0-9/_-]+$',
@@ -237,63 +239,119 @@ class Rules {
 	/**
 	 * Get all data rules.
 	 *
+	 * @param WP_REST_Request $request The REST request object, which contains query parameters such as 'ruleset_type'.
+	 *
 	 * @return WP_REST_Response|WP_Error REST response containing all data rules or WP_Error on failure.
 	 */
-	public function get_all(): WP_REST_Response|WP_Error {
-		return rest_ensure_response(
-			array(
-				array(
-					'id'           => 'rule-1',
-					'condition'    => array(
-						'type' => 'home_page',
-					),
-					'styleHandles' => array( 'handle-1', 'handle-2' ),
-				),
-			)
-		);
+	public function get_all( WP_REST_Request $request ): WP_REST_Response|WP_Error {
+		$ruleset_type = $request->get_param( 'ruleset_type' );
+
+		$option_key = self::OPTION_KEY_PREFIX . $ruleset_type;
+
+		$rules = get_option( $option_key, array() );
+
+		return rest_ensure_response( $rules );
 	}
 
 	/**
 	 * Add a new rule.
 	 *
+	 * @param WP_REST_Request $request The REST request object, which contains the new rule data and 'ruleset_type' parameter.
+	 *
 	 * @return WP_REST_Response|WP_Error REST response containing the added rule or WP_Error on failure.
 	 */
-	public function add(): WP_REST_Response|WP_Error {
-		return rest_ensure_response(
-			array(
-				'id'           => 'rule-2',
-				'condition'    => array(
-					'type' => 'home_page',
-				),
-				'styleHandles' => array( 'handle-111', 'handle-233' ),
-			)
+	public function add( WP_REST_Request $request ): WP_REST_Response|WP_Error {
+		$ruleset_type = $request->get_param( 'ruleset_type' );
+		$rule         = $request->get_param( 'rule' );
+
+		$option_key = self::OPTION_KEY_PREFIX . $ruleset_type;
+
+		$rules = get_option( $option_key, array() );
+
+		$new_rule = array(
+			'id'           => sprintf( 'rule-%d-%d', time(), wp_rand( 10, 100 ) ),
+			'condition'    => $rule['condition'],
+			'styleHandles' => $rule['styleHandles'],
 		);
+
+		$rules[] = $new_rule;
+		update_option( $option_key, $rules );
+
+		return rest_ensure_response( $new_rule );
 	}
 
 	/**
 	 * Update an existing rule.
 	 *
+	 * @param WP_REST_Request $request The REST request object, which contains the updated rule data and 'ruleset_type' parameter.
+	 *
 	 * @return WP_REST_Response|WP_Error REST response containing the updated rule or WP_Error on failure.
 	 */
-	public function update(): WP_REST_Response|WP_Error {
-		return rest_ensure_response(
-			array(
-				'id'           => 'rule-1',
-				'condition'    => array(
-					'type'  => 'exact_url',
-					'value' => 'specific-page',
-				),
-				'styleHandles' => array( 'handle-1', 'handle-2', 'handle-3' ),
-			)
-		);
+	public function update( WP_REST_Request $request ): WP_REST_Response|WP_Error {
+		$ruleset_type = $request->get_param( 'ruleset_type' );
+		$rule         = $request->get_param( 'rule' );
+
+		$option_key = self::OPTION_KEY_PREFIX . $ruleset_type;
+
+		$rules = get_option( $option_key, array() );
+
+		$updated_rules = array();
+		$updated_rule  = null;
+
+		foreach ( $rules as $existing_rule ) {
+			if ( $existing_rule['id'] === $rule['id'] ) {
+				$updated_rule    = array(
+					'id'           => $existing_rule['id'],
+					'condition'    => $rule['condition'],
+					'styleHandles' => $rule['styleHandles'],
+				);
+				$updated_rules[] = $updated_rule;
+			} else {
+				$updated_rules[] = $existing_rule;
+			}
+		}
+
+		if ( ! $updated_rule ) {
+			return new WP_Error( 'rule_not_found', 'Rule not found', array( 'status' => 404 ) );
+		}
+
+		update_option( $option_key, $updated_rules );
+
+		return rest_ensure_response( $updated_rule );
 	}
 
 	/**
 	 * Delete a rule.
 	 *
+	 * @param WP_REST_Request $request The REST request object, which contains the 'id' of the rule to delete and 'ruleset_type' parameter.
+	 *
 	 * @return WP_REST_Response|WP_Error REST response confirming deletion or WP_Error on failure.
 	 */
-	public function delete(): WP_REST_Response|WP_Error {
-		return rest_ensure_response( 'rule-1' );
+	public function delete( WP_REST_Request $request ): WP_REST_Response|WP_Error {
+		$ruleset_type = $request->get_param( 'ruleset_type' );
+		$id           = $request->get_param( 'id' );
+
+		$option_key = self::OPTION_KEY_PREFIX . $ruleset_type;
+
+		$rules = get_option( $option_key, array() );
+
+		$updated_rules = array();
+		$deleted_rule  = null;
+
+		foreach ( $rules as $existing_rule ) {
+			if ( $existing_rule['id'] === $id ) {
+				$deleted_rule = $existing_rule;
+			} else {
+				$updated_rules[] = $existing_rule;
+			}
+		}
+
+		if ( ! $deleted_rule ) {
+			return new WP_Error( 'rule_not_found', 'Rule not found', array( 'status' => 404 ) );
+		}
+
+		update_option( $option_key, $updated_rules );
+
+		return rest_ensure_response( $id );
 	}
 }

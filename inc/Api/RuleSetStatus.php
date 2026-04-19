@@ -7,6 +7,7 @@ namespace Mach\Api;
 use Mach\Traits\Singleton;
 
 use WP_Error;
+use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
 
@@ -19,6 +20,7 @@ class RuleSetStatus {
 
 	const ROUTE_NAMESPACE      = 'mach/v1';
 	const ROUTE_RULESET_STATUS = '/ruleset-status';
+	const OPTION_KEY_PREFIX    = 'mach_ruleset_status_';
 
 	/**
 	 * Constructor for the RuleSetStatus class.
@@ -79,18 +81,35 @@ class RuleSetStatus {
 	/**
 	 * Get the status of the ruleset.
 	 *
+	 * @param WP_REST_Request $request The REST request object.
+	 *
 	 * @return WP_REST_Response|WP_Error REST response containing the ruleset status or WP_Error on failure.
 	 */
-	public function get(): WP_REST_Response|WP_Error {
-		return rest_ensure_response( true );
+	public function get( WP_REST_Request $request ): WP_REST_Response|WP_Error {
+		$ruleset_type = $request->get_param( 'ruleset_type' );
+
+		$option_key = self::OPTION_KEY_PREFIX . $ruleset_type;
+
+		$status = get_option( $option_key, false );
+
+		return rest_ensure_response( $status );
 	}
 
 	/**
 	 * Update the status of the ruleset.
 	 *
+	 * @param WP_REST_Request $request The REST request object containing the 'ruleset_type' and 'enabled' parameters.
+	 *
 	 * @return WP_REST_Response|WP_Error REST response indicating success or failure.
 	 */
-	public function update(): WP_REST_Response|WP_Error {
-		return rest_ensure_response( false );
+	public function update( WP_REST_Request $request ): WP_REST_Response|WP_Error {
+		$ruleset_type = $request->get_param( 'ruleset_type' );
+		$enabled      = $request->get_param( 'enabled' );
+
+		$option_key = self::OPTION_KEY_PREFIX . $ruleset_type;
+
+		update_option( $option_key, $enabled );
+
+		return rest_ensure_response( $enabled );
 	}
 }
