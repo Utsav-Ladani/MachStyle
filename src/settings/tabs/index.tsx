@@ -7,19 +7,31 @@ import { TestTab } from '@/settings/tabs/test';
 import { RuleSetId } from '@/types';
 import { RuleSetContext } from '@/context/ruleset';
 
-const tabs: { id: RuleSetId; label: string; component: React.ComponentType }[] =
-	[
-		{
-			id: 'live',
-			label: __( 'Live Settings (Production)', 'mach' ),
-			component: LiveTab,
-		},
-		{
-			id: 'test',
-			label: __( 'Test Flight (Lab)', 'mach' ),
-			component: TestTab,
-		},
-	];
+const tabs: {
+	id: RuleSetId;
+	label: string;
+	description: string;
+	component: React.ComponentType;
+}[] = [
+	{
+		id: 'live',
+		label: __( 'Live Settings (Production)', 'mach' ),
+		description: __(
+			'Rules here affect your production visitors in real time.',
+			'mach'
+		),
+		component: LiveTab,
+	},
+	{
+		id: 'test',
+		label: __( 'Test Flight (Lab)', 'mach' ),
+		description: __(
+			'Rules here run only in Test Flight mode for safe testing.',
+			'mach'
+		),
+		component: TestTab,
+	},
+];
 
 export const Tabs = () => {
 	const [ activeTab, setActiveTab ] = useState< RuleSetId >( 'live' );
@@ -36,7 +48,12 @@ export const Tabs = () => {
 						isActive={ activeTab === tab.id }
 						onClick={ () => setActiveTab( tab.id ) }
 					>
-						{ tab.label }
+						<h2 className="text-lg text-gray-700 m-0">
+							{ tab.label }
+						</h2>
+						<p className="text-sm text-gray-500 m-0">
+							{ tab.description }
+						</p>
 					</TabButton>
 				) ) }
 			</div>

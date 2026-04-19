@@ -14,7 +14,7 @@ export const TabButton = ( {
 	return (
 		<button
 			className={ classNames(
-				'flex-1 py-4 text-base box-content border-x-0 border-t-0 border-b-3',
+				'flex-1 py-3 text-base box-content border-x-0 border-t-0 border-b-3',
 				{
 					'bg-gray-100 border-transparent': ! isActive,
 					'bg-transparent border-[var(--wp-admin-theme-color)] text-[var(--wp-admin-theme-color)]':

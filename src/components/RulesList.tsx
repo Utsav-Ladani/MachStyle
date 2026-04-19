@@ -99,7 +99,7 @@ export const RulesList = () => {
 	);
 
 	return (
-		<div className="rounded overflow-hidden ring-2 ring-gray-200 mb-10">
+		<div className="rounded overflow-hidden ring-1 ring-gray-300 mb-10">
 			<DataViews
 				actions={ actions }
 				data={ data }

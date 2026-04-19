@@ -10,7 +10,7 @@ export const LiveTab = () => {
 	const [ isOpen, setIsOpen ] = useState< boolean >( false );
 
 	return (
-		<div className="p-8">
+		<div className="p-6">
 			<RulesetToggle
 				label={ __( 'Enable Optimization For Live Site', 'mach' ) }
 				help={ __(
@@ -18,7 +18,7 @@ export const LiveTab = () => {
 					'mach'
 				) }
 			/>
-			<Flex align="center" justify="space-between" className="mt-8 mb-4">
+			<Flex align="center" justify="space-between" className="mt-6 mb-4">
 				<h2 className="text-xl text-gray-700 m-0">
 					{ __( 'Active Optimization Rules', 'mach' ) }
 				</h2>

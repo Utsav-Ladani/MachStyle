@@ -1,11 +1,4 @@
-import {
-	Button,
-	Card,
-	CardBody,
-	ExternalLink,
-	Flex,
-	Tooltip,
-} from '@wordpress/components';
+import { Button, Card, CardBody, Flex } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
@@ -81,20 +74,16 @@ export const TestFlightStatus = () => {
 	};
 
 	const handleCopyQueryParams = async () => {
-		const queryParam = `?mach_test_flight=${ encodeURIComponent(
-			testFlightId
-		) }`;
-
 		try {
-			await navigator.clipboard.writeText( queryParam );
+			await navigator.clipboard.writeText( testFlightId );
 			createNotice(
-				__( 'Query parameter copied to clipboard.', 'mach' ),
+				__( 'Test Flight ID copied to clipboard.', 'mach' ),
 				'success'
 			);
 		} catch {
 			createNotice(
 				__(
-					'Failed to copy query parameter. Please try again.',
+					'Failed to copy Test Flight ID. Please try again.',
 					'mach'
 				),
 				'error'
@@ -106,34 +95,35 @@ export const TestFlightStatus = () => {
 		<Card className="mt-6">
 			<CardBody>
 				<Flex direction="column" align="start" gap={ 1 }>
-					<h2 className="text-gray-600 m-0">
+					<h2 className="text-gray-600 m-0 mb-1">
 						{ __( 'Test Flight ID', 'mach' ) }
 					</h2>
-					<p className="text-sm text-gray-500 m-0 mb-1">
+					<p className="text-sm text-gray-500 m-0 mb-2">
 						{ __(
-							'Add this ID to your test URLs using the "mach_test_flight" query parameter to enable test flight optimizations.',
+							'Use the Mach Quick Access menu in the Admin Bar on any page to open that page in Test Flight instantly.',
 							'mach'
 						) }
 					</p>
-					{ testFlightId && (
-						<div className="bg-gray-100 p-3 rounded mb-2">
-							<span>{ __( 'Example:', 'mach' ) } </span>
-							<ExternalLink href={ testFlightUrl }>
-								{ testFlightUrl }
-							</ExternalLink>
-						</div>
-					) }
 					<Flex justify="start" gap={ 4 }>
-						<Tooltip text={ __( 'Click to copy', 'mach' ) }>
+						{ testFlightUrl && (
 							<Button
 								__next40pxDefaultSize
 								variant="secondary"
-								onClick={ handleCopyQueryParams }
+								href={ testFlightUrl }
+								target="_blank"
 								disabled={ ! testFlightId }
 							>
-								{ __( 'Copy Query Parameter', 'mach' ) }
+								{ __( 'Open Test Flight URL', 'mach' ) }
 							</Button>
-						</Tooltip>
+						) }
+						<Button
+							__next40pxDefaultSize
+							variant="secondary"
+							onClick={ handleCopyQueryParams }
+							disabled={ ! testFlightId }
+						>
+							{ __( 'Copy Test Flight ID', 'mach' ) }
+						</Button>
 						<Button
 							__next40pxDefaultSize
 							variant="secondary"
