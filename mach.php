@@ -18,6 +18,8 @@ declare( strict_types=1 );
 
 namespace Mach;
 
+use Mach\Api\TestFlightId;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit();
 
@@ -30,3 +32,11 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 Plugin::get_instance();
+
+/**
+ * Activation hook to set up the test flight ID.
+ */
+function activate_mach() {
+	TestFlightId::setup_test_flight_id();
+}
+register_activation_hook( __FILE__, __NAMESPACE__ . '\activate_mach' );

@@ -21,6 +21,7 @@ class TestFlightId {
 	const ROUTE_NAMESPACE      = 'mach/v1';
 	const ROUTE_TEST_FLIGHT_ID = '/test-flight-id';
 	const OPTION_KEY           = 'mach_test_flight_id';
+	const PREFIX               = 'MACH-TF-';
 
 	/**
 	 * Constructor for the TestFlightId class.
@@ -77,10 +78,32 @@ class TestFlightId {
 	 * @return WP_REST_Response|WP_Error REST response indicating success or failure.
 	 */
 	public function recreate(): WP_REST_Response|WP_Error {
-		$new_id = 'MACH-TF-' . wp_generate_password( 9, false, false );
+		$new_id = $this->generate_test_flight_id();
 
 		update_option( self::OPTION_KEY, $new_id );
 
 		return rest_ensure_response( $new_id );
+	}
+
+	/**
+	 * Set up the test flight ID on plugin activation.
+	 */
+	public static function setup_test_flight_id(): void {
+		$existing_id = get_option( self::OPTION_KEY );
+
+		if ( ! empty( $existing_id ) ) {
+			return;
+		}
+
+		update_option( self::OPTION_KEY, ( new self() )->generate_test_flight_id() );
+	}
+
+	/**
+	 * Generate a new test flight ID.
+	 *
+	 * @return string The generated test flight ID.
+	 */
+	private function generate_test_flight_id(): string {
+		return self::PREFIX . wp_generate_password( 9, false, false );
 	}
 }
