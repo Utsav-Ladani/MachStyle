@@ -11,7 +11,13 @@ export const LiveTab = () => {
 
 	return (
 		<div className="p-8">
-			<RulesetToggle />
+			<RulesetToggle
+				label={ __( 'Enable Optimization For Live Site', 'mach' ) }
+				help={ __(
+					'Turn this off to instantly stop all live optimizations.',
+					'mach'
+				) }
+			/>
 			<Flex align="center" justify="space-between" className="mt-8 mb-4">
 				<h2 className="text-xl text-gray-700 m-0">
 					{ __( 'Active Optimization Rules', 'mach' ) }
