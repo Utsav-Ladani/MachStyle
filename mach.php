@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Mach
- * Description:       A plugin to optimize site performance by conditionally deferring the loading of CSS styles.
+ * Description:       Speed Up Your Site with Smarter Style Loading.
  * Version:           1.0.0
  * Requires at least: 6.7
  * Requires PHP:      8.1
