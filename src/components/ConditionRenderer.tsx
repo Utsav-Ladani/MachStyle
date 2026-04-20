@@ -10,7 +10,7 @@ export const ConditionRenderer = ( {
 	if ( ! CONDITION_LABELS.hasOwnProperty( condition.type ) ) {
 		return (
 			<span className="text-xs italic">
-				{ __( 'Unknown Condition', 'mach' ) }
+				{ __( 'Unknown Condition', 'mach-style' ) }
 			</span>
 		);
 	}

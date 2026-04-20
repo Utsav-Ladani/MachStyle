@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mach\Api;
+namespace MachStyle\Api;
 
-use Mach\Traits\Singleton;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit();
+
+use MachStyle\Traits\Singleton;
 
 use WP_Error;
 use WP_REST_Request;
@@ -18,9 +21,9 @@ class RuleSetStatus {
 
 	use Singleton;
 
-	const ROUTE_NAMESPACE      = 'mach/v1';
+	const ROUTE_NAMESPACE      = 'mach-style/v1';
 	const ROUTE_RULESET_STATUS = '/ruleset-status';
-	const OPTION_KEY_PREFIX    = 'mach_ruleset_status_';
+	const OPTION_KEY_PREFIX    = 'mach_style_ruleset_status_';
 
 	/**
 	 * Constructor for the RuleSetStatus class.

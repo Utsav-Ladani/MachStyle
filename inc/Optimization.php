@@ -2,12 +2,15 @@
 
 declare( strict_types=1 );
 
-namespace Mach;
+namespace MachStyle;
 
-use Mach\Api\Rules;
-use Mach\Api\RuleSetStatus;
-use Mach\Api\TestFlightId;
-use Mach\Traits\Singleton;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit();
+
+use MachStyle\Api\Rules;
+use MachStyle\Api\RuleSetStatus;
+use MachStyle\Api\TestFlightId;
+use MachStyle\Traits\Singleton;
 
 /**
  * Optimization class to handle style loading optimization.
@@ -19,7 +22,7 @@ class Optimization {
 	/**
 	 * Query variable name for test flight.
 	 */
-	const TEST_FLIGHT_QUERY_VAR_NAME = 'mach_test_flight';
+	const TEST_FLIGHT_QUERY_VAR_NAME = 'mach_style_test_flight';
 
 	/**
 	 * Array to hold deferred styles.

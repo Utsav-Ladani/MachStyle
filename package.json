@@ -1,11 +1,11 @@
 {
-	"name": "mach",
+	"name": "mach-style",
 	"version": "1.0.0",
 	"description": "A plugin to optimize site performance by conditionally deferring the loading of CSS styles.",
 	"author": "Utsav Ladani",
 	"license": "GPL-2.0-or-later",
 	"keywords": [
-		"mach",
+		"mach-style",
 		"performance",
 		"style",
 		"css",
@@ -13,19 +13,19 @@
 		"plugin",
 		"core web vitals"
 	],
-	"homepage": "https://github.com/Utsav-Ladani/mach",
+	"homepage": "https://github.com/Utsav-Ladani/MachStyle",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Utsav-Ladani/mach.git"
+		"url": "https://github.com/Utsav-Ladani/MachStyle.git"
 	},
 	"bugs": {
-		"url": "https://github.com/Utsav-Ladani/mach/issues"
+		"url": "https://github.com/Utsav-Ladani/MachStyle/issues"
 	},
 	"files": [
 		"build/",
-		"includes/",
+		"inc/",
 		"vendor/",
-		"mach.php",
+		"mach-style.php",
 		"composer.json"
 	],
 	"dependencies": {
@@ -67,7 +67,7 @@
 		"plugin-zip": "wp-scripts plugin-zip",
 		"check-engines": "wp-scripts check-engines",
 		"check-licenses": "wp-scripts check-licenses",
-		"release": "npm run build && composer install --no-dev --optimize-autoloader && npm run plugin-zip && composer install"
+		"release": "pnpm run build && composer install --no-dev --optimize-autoloader && pnpm run plugin-zip && composer install"
 	},
 	"packageManager": "pnpm@11.0.0-dev.1005+sha512.91f84a392eea348ea4852a182912d2520273a4336f933b78cc44bc931eb999923c097e9433a9b355adc1f725725ea99082fc9f032a559df832632e764c92c798"
 }

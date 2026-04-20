@@ -31,7 +31,7 @@ export const TestFlightStatus = () => {
 				createNotice(
 					__(
 						'Failed to fetch Test Flight ID. Please refresh the page.',
-						'mach'
+						'mach-style'
 					),
 					'error'
 				);
@@ -51,20 +51,23 @@ export const TestFlightStatus = () => {
 
 	const handleRecreateId = async () => {
 		setIsRecreating( true );
-		createNotice( __( 'Recreating Test Flight ID…', 'mach' ), 'info' );
+		createNotice(
+			__( 'Recreating Test Flight ID…', 'mach-style' ),
+			'info'
+		);
 
 		try {
 			const id = await recreateTestFlightId();
 			setTestFlightId( id );
 			createNotice(
-				__( 'Test Flight ID recreated successfully.', 'mach' ),
+				__( 'Test Flight ID recreated successfully.', 'mach-style' ),
 				'success'
 			);
 		} catch {
 			createNotice(
 				__(
 					'Failed to recreate Test Flight ID. Please try again.',
-					'mach'
+					'mach-style'
 				),
 				'error'
 			);
@@ -77,14 +80,14 @@ export const TestFlightStatus = () => {
 		try {
 			await navigator.clipboard.writeText( testFlightId );
 			createNotice(
-				__( 'Test Flight ID copied to clipboard.', 'mach' ),
+				__( 'Test Flight ID copied to clipboard.', 'mach-style' ),
 				'success'
 			);
 		} catch {
 			createNotice(
 				__(
 					'Failed to copy Test Flight ID. Please try again.',
-					'mach'
+					'mach-style'
 				),
 				'error'
 			);
@@ -96,12 +99,12 @@ export const TestFlightStatus = () => {
 			<CardBody>
 				<Flex direction="column" align="start" gap={ 1 }>
 					<h2 className="text-gray-600 m-0 mb-1">
-						{ __( 'Test Flight ID', 'mach' ) }
+						{ __( 'Test Flight ID', 'mach-style' ) }
 					</h2>
 					<p className="text-sm text-gray-500 m-0 mb-2">
 						{ __(
-							'Use the Mach Quick Access menu in the Admin Bar on any page to open that page in Test Flight instantly.',
-							'mach'
+							'Use the MachStyle Quick Access menu in the Admin Bar on any page to open that page in Test Flight instantly.',
+							'mach-style'
 						) }
 					</p>
 					<Flex justify="start" gap={ 4 }>
@@ -113,7 +116,7 @@ export const TestFlightStatus = () => {
 								target="_blank"
 								disabled={ ! testFlightId }
 							>
-								{ __( 'Open Test Flight URL', 'mach' ) }
+								{ __( 'Open Test Flight URL', 'mach-style' ) }
 							</Button>
 						) }
 						<Button
@@ -122,7 +125,7 @@ export const TestFlightStatus = () => {
 							onClick={ handleCopyQueryParams }
 							disabled={ ! testFlightId }
 						>
-							{ __( 'Copy Test Flight ID', 'mach' ) }
+							{ __( 'Copy Test Flight ID', 'mach-style' ) }
 						</Button>
 						<Button
 							__next40pxDefaultSize
@@ -131,7 +134,7 @@ export const TestFlightStatus = () => {
 							isBusy={ isRecreating }
 							disabled={ isRecreating || isFetching }
 						>
-							{ __( 'Recreate Test Flight ID', 'mach' ) }
+							{ __( 'Recreate Test Flight ID', 'mach-style' ) }
 						</Button>
 					</Flex>
 				</Flex>

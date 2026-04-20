@@ -1,3 +1,3 @@
 module.exports = {
-	important: '.mach-tailwind',
+	important: '.mach-style-tailwind',
 };

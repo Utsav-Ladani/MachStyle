@@ -41,15 +41,15 @@ export const ModalAddRule = ( { isOpen, onClose }: ModalAddRuleProps ) => {
 
 	return (
 		<Modal
-			title={ __( 'Add New Rule', 'mach' ) }
+			title={ __( 'Add New Rule', 'mach-style' ) }
 			onRequestClose={ onClose }
-			className="mach-tailwind"
+			className="mach-style-tailwind"
 		>
 			<Flex direction="column" gap="4" className="w-lg">
 				<SelectControl
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __( 'Select Condition', 'mach' ) }
+					label={ __( 'Select Condition', 'mach-style' ) }
 					value={ condition?.type || '' }
 					options={ CONDITION_TYPE_OPTIONS }
 					onChange={ ( value ) => {
@@ -65,8 +65,11 @@ export const ModalAddRule = ( { isOpen, onClose }: ModalAddRuleProps ) => {
 				<FormTokenField
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __( 'Style Handles', 'mach' ) }
-					placeholder={ __( 'Enter style handles to defer', 'mach' ) }
+					label={ __( 'Style Handles', 'mach-style' ) }
+					placeholder={ __(
+						'Enter style handles to defer',
+						'mach-style'
+					) }
 					value={ styleHandles }
 					onChange={ ( newValue ) =>
 						setStyleHandles( newValue as string[] )
@@ -74,7 +77,7 @@ export const ModalAddRule = ( { isOpen, onClose }: ModalAddRuleProps ) => {
 				/>
 				<Flex align="center" justify="flex-end" gap="2">
 					<Button variant="secondary" onClick={ onClose }>
-						{ __( 'Cancel', 'mach' ) }
+						{ __( 'Cancel', 'mach-style' ) }
 					</Button>
 					<Button
 						variant="primary"
@@ -84,7 +87,7 @@ export const ModalAddRule = ( { isOpen, onClose }: ModalAddRuleProps ) => {
 							styleHandles.length === 0
 						}
 					>
-						{ __( 'Add Rule', 'mach' ) }
+						{ __( 'Add Rule', 'mach-style' ) }
 					</Button>
 				</Flex>
 			</Flex>

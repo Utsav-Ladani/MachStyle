@@ -15,28 +15,28 @@ export const CopyRulesButton = () => {
 
 	const sourceLabel =
 		sourceRuleset === 'live'
-			? __( 'Live Settings', 'mach' )
-			: __( 'Test Flight', 'mach' );
+			? __( 'Live Settings', 'mach-style' )
+			: __( 'Test Flight', 'mach-style' );
 	const targetLabel =
 		targetRuleset === 'live'
-			? __( 'Live Settings', 'mach' )
-			: __( 'Test Flight', 'mach' );
+			? __( 'Live Settings', 'mach-style' )
+			: __( 'Test Flight', 'mach-style' );
 
 	const buttonLabel = sprintf(
 		/* translators: %s is either "Live Settings" or "Test Flight" */
-		__( 'Copy Rules from %s', 'mach' ),
+		__( 'Copy Rules from %s', 'mach-style' ),
 		sourceLabel
 	);
 
 	const successNotice = sprintf(
 		/* translators: %1$s and %2$s are either "Live Settings" or "Test Flight" */
-		__( '%1$s rules replaced with %2$s rules.', 'mach' ),
+		__( '%1$s rules replaced with %2$s rules.', 'mach-style' ),
 		targetLabel,
 		sourceLabel
 	);
 	const errorNotice = sprintf(
 		/* translators: %s is either "Live Settings" or "Test Flight" */
-		__( 'Failed to copy %s rules.', 'mach' ),
+		__( 'Failed to copy %s rules.', 'mach-style' ),
 		sourceLabel
 	);
 

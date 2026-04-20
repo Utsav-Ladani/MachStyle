@@ -2,7 +2,10 @@
 
 declare( strict_types=1 );
 
-namespace Mach\Traits;
+namespace MachStyle\Traits;
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit();
 
 /**
  * Singleton trait for implementing the singleton pattern.

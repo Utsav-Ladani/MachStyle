@@ -52,12 +52,12 @@ export const ModalEditRule = ( {
 	};
 
 	return (
-		<div className="mach-tailwind">
+		<div className="mach-style-tailwind">
 			<Flex direction="column" gap="4">
 				<SelectControl
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __( 'Select Condition', 'mach' ) }
+					label={ __( 'Select Condition', 'mach-style' ) }
 					value={ condition?.type || '' }
 					options={ CONDITION_TYPE_OPTIONS }
 					onChange={ ( value ) => {
@@ -73,8 +73,11 @@ export const ModalEditRule = ( {
 				<FormTokenField
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __( 'Style Handles', 'mach' ) }
-					placeholder={ __( 'Enter style handles to defer', 'mach' ) }
+					label={ __( 'Style Handles', 'mach-style' ) }
+					placeholder={ __(
+						'Enter style handles to defer',
+						'mach-style'
+					) }
 					value={ styleHandles }
 					onChange={ ( newValue ) =>
 						setStyleHandles( newValue as string[] )
@@ -82,7 +85,7 @@ export const ModalEditRule = ( {
 				/>
 				<Flex align="center" justify="flex-end" gap="2">
 					<Button variant="secondary" onClick={ () => onClose?.() }>
-						{ __( 'Cancel', 'mach' ) }
+						{ __( 'Cancel', 'mach-style' ) }
 					</Button>
 					<Button
 						variant="primary"
@@ -92,7 +95,7 @@ export const ModalEditRule = ( {
 							styleHandles.length === 0
 						}
 					>
-						{ __( 'Edit Rule', 'mach' ) }
+						{ __( 'Edit Rule', 'mach-style' ) }
 					</Button>
 				</Flex>
 			</Flex>

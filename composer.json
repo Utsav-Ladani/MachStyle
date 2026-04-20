@@ -1,11 +1,11 @@
 {
-	"name": "mach/mach",
+	"name": "mach-style/mach-style",
 	"type": "wordpress-plugin",
 	"description": "A plugin to optimize site performance by conditionally deferring the loading of CSS styles.",
 	"license": "GPL-2.0-or-later",
 	"autoload": {
 		"psr-4": {
-			"Mach\\": "inc/"
+			"MachStyle\\": "inc/"
 		}
 	},
 	"authors": [

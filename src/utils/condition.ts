@@ -88,6 +88,6 @@ export const getHumanReadableCondition = ( condition: Condition ): string => {
 				 ).value
 			}`;
 		default:
-			return __( 'Unknown Condition', 'mach' );
+			return __( 'Unknown Condition', 'mach-style' );
 	}
 };

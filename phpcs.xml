@@ -6,7 +6,7 @@
 
 	<arg name="extensions" value="php" />
 
-	<file>./mach.php</file>
+	<file>./mach-style.php</file>
 	<file>./inc/</file>
 
 	<exclude-pattern>vendor/*</exclude-pattern>
@@ -24,7 +24,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="mach" />
+				<element value="mach-style" />
 				<element value="default" />
 			</property>
 		</properties>

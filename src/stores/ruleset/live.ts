@@ -3,7 +3,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { Rule } from '@/types';
 import { createNotice } from '@/utils/notice';
 
-const STORE_NAME = 'mach/live-ruleset';
+const STORE_NAME = 'mach-style/live-ruleset';
 
 type State = {
 	enabled: boolean;
@@ -54,7 +54,7 @@ const actions = {
 		try {
 			const newEnabled = await apiFetch( {
 				method: 'POST',
-				path: '/mach/v1/ruleset-status',
+				path: '/mach-style/v1/ruleset-status',
 				data: {
 					ruleset_type: 'live',
 					enabled,
@@ -74,7 +74,7 @@ const actions = {
 
 			const newRule = await apiFetch( {
 				method: 'POST',
-				path: '/mach/v1/rules',
+				path: '/mach-style/v1/rules',
 				data: {
 					ruleset_type: 'live',
 					rule,
@@ -96,7 +96,7 @@ const actions = {
 
 			const updatedRule = await apiFetch( {
 				method: 'PUT',
-				path: '/mach/v1/rules',
+				path: '/mach-style/v1/rules',
 				data: {
 					ruleset_type: 'live',
 					rule,
@@ -118,7 +118,7 @@ const actions = {
 
 			const deletedRuleId = await apiFetch( {
 				method: 'DELETE',
-				path: '/mach/v1/rules',
+				path: '/mach-style/v1/rules',
 				data: {
 					ruleset_type: 'live',
 					id: ruleId,
@@ -153,7 +153,7 @@ const resolvers = {
 					ruleset_type: 'live',
 				} );
 
-				const path = `/mach/v1/ruleset-status?${ urlSearchParams.toString() }`;
+				const path = `/mach-style/v1/ruleset-status?${ urlSearchParams.toString() }`;
 
 				const enabled = await apiFetch( {
 					method: 'GET',
@@ -176,7 +176,7 @@ const resolvers = {
 					ruleset_type: 'live',
 				} );
 
-				const path = `/mach/v1/rules?${ searchParams.toString() }`;
+				const path = `/mach-style/v1/rules?${ searchParams.toString() }`;
 
 				const rules = await apiFetch( {
 					method: 'GET',

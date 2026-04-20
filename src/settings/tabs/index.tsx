@@ -15,19 +15,19 @@ const tabs: {
 }[] = [
 	{
 		id: 'live',
-		label: __( 'Live Settings (Production)', 'mach' ),
+		label: __( 'Live Settings (Production)', 'mach-style' ),
 		description: __(
 			'Rules here affect your production visitors in real time.',
-			'mach'
+			'mach-style'
 		),
 		component: LiveTab,
 	},
 	{
 		id: 'test',
-		label: __( 'Test Flight (Lab)', 'mach' ),
+		label: __( 'Test Flight (Lab)', 'mach-style' ),
 		description: __(
 			'Rules here run only in Test Flight mode for safe testing.',
-			'mach'
+			'mach-style'
 		),
 		component: TestTab,
 	},

@@ -29,24 +29,24 @@ export const ModalDeleteRule = ( {
 	};
 
 	return (
-		<div className="mach-tailwind">
+		<div className="mach-style-tailwind">
 			<Flex direction="column" gap="4">
 				<p className="text-sm text-gray-600">
 					{ __(
 						'Are you sure you want to delete this rule? This action cannot be undone.',
-						'mach'
+						'mach-style'
 					) }
 				</p>
 				<Flex align="center" justify="flex-end" gap="2">
 					<Button variant="secondary" onClick={ () => onClose?.() }>
-						{ __( 'Cancel', 'mach' ) }
+						{ __( 'Cancel', 'mach-style' ) }
 					</Button>
 					<Button
 						variant="primary"
 						isDestructive
 						onClick={ handleDeleteRule }
 					>
-						{ __( 'Delete Rule', 'mach' ) }
+						{ __( 'Delete Rule', 'mach-style' ) }
 					</Button>
 				</Flex>
 			</Flex>

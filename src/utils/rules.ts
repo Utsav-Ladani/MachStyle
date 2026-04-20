@@ -8,7 +8,7 @@ export const copyRules = (
 ): Promise< boolean > => {
 	return apiFetch< boolean >( {
 		method: 'POST',
-		path: '/mach/v1/rules/copy',
+		path: '/mach-style/v1/rules/copy',
 		data: {
 			source_ruleset: sourceRuleset,
 			target_ruleset: targetRuleset,

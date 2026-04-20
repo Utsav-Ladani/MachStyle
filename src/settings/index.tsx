@@ -4,7 +4,7 @@ import { App } from './App';
 import '../tailwind.scss';
 import './styles.scss';
 
-const rootElement = document.querySelector( '#mach-settings-root' );
+const rootElement = document.querySelector( '#mach-style-settings-root' );
 
 if ( rootElement ) {
 	createRoot( rootElement ).render(

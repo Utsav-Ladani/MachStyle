@@ -22,13 +22,16 @@ export const ModalCopyRules = ( {
 		return null;
 	}
 
-	/* translators: %s is either "Live Settings" or "Test Flight" */
-	const title = sprintf( __( 'Copy Rules from %s', 'mach' ), sourceLabel );
+	const title = sprintf(
+		/* translators: %s is either "Live Settings" or "Test Flight" */
+		__( 'Copy Rules from %s', 'mach-style' ),
+		sourceLabel
+	);
 	const description = sprintf(
 		/* translators: %1$s and %2$s are either "Live Settings" or "Test Flight" */
 		__(
 			'This will replace all rules in %1$s with rules from %2$s. Existing rules in %1$s will be permanently removed. Are you sure you want to proceed?',
-			'mach'
+			'mach-style'
 		),
 		targetLabel,
 		sourceLabel
@@ -38,7 +41,7 @@ export const ModalCopyRules = ( {
 		<Modal
 			title={ title }
 			onRequestClose={ onClose }
-			className="mach-tailwind"
+			className="mach-style-tailwind"
 		>
 			<Flex direction="column" gap="4" className="w-lg">
 				<p className="text-sm text-gray-600 m-0">{ description }</p>
@@ -48,7 +51,7 @@ export const ModalCopyRules = ( {
 						onClick={ onClose }
 						disabled={ isSubmitting }
 					>
-						{ __( 'Cancel', 'mach' ) }
+						{ __( 'Cancel', 'mach-style' ) }
 					</Button>
 					<Button
 						variant="primary"
@@ -56,7 +59,7 @@ export const ModalCopyRules = ( {
 						isBusy={ isSubmitting }
 						disabled={ isSubmitting }
 					>
-						{ __( 'Yes, Copy Rules', 'mach' ) }
+						{ __( 'Yes, Copy Rules', 'mach-style' ) }
 					</Button>
 				</Flex>
 			</Flex>

@@ -1,16 +1,16 @@
-# Mach - Speed Up Your Site with Smarter Style Loading
+# MachStyle - Speed Up Your Site with Smarter Style Loading
 
-Mach helps your pages feel faster by loading critical styles first and delaying selected non-critical CSS.
+MachStyle helps your pages feel faster by loading critical styles first and delaying selected non-critical CSS.
 
 You decide where this happens using simple rules. For many sites, this can improve Core Web Vitals.
 
 ## Screenshot
 
-<img width="1278" height="758" alt="Mach Settings Screenshot" src="https://github.com/user-attachments/assets/914cd6f8-7869-49dd-bcbb-47d83fbda4e3" />
+<img width="1278" height="758" alt="MachStyle Settings Screenshot" src="https://github.com/user-attachments/assets/914cd6f8-7869-49dd-bcbb-47d83fbda4e3" />
 
 ## Quick Start
 
-1. Open Mach and go to Test Flight.
+1. Open MachStyle and go to Test Flight.
 2. Add one rule for one page group (home page, a post type, or a URL pattern).
 3. Add the style handles you want to defer.
 4. Check the page on desktop and mobile.
@@ -59,7 +59,7 @@ Avoid deferring styles that control first-view layout:
 - Smoother loading can reduce layout shifts (CLS).
 - Cleaner early rendering can support better overall perceived speed.
 
-Mach is best used in small steps: test, measure, then roll out.
+MachStyle is best used in small steps: test, measure, then roll out.
 
 ## Author
 

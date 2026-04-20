@@ -1,27 +1,27 @@
 <?php
 /**
- * Plugin Name:       Mach
+ * Plugin Name:       MachStyle
  * Description:       Speed Up Your Site with Smarter Style Loading.
  * Version:           1.0.0
- * Requires at least: 6.7
+ * Requires at least: 6.5
  * Requires PHP:      8.1
  * Author:            utsavladani
  * Author URI:        https://profile.wordpress.org/utsavladani
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       mach
+ * Text Domain:       mach-style
  *
- * @package Mach
+ * @package MachStyle
  */
 
 declare( strict_types=1 );
 
-namespace Mach;
-
-use Mach\Api\TestFlightId;
+namespace MachStyle;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit();
+
+use MachStyle\Api\TestFlightId;
 
 const BUILD_DIR = __DIR__ . '/build/';
 

@@ -2,12 +2,17 @@
 
 declare( strict_types=1 );
 
-namespace Mach;
+namespace MachStyle;
 
-use Mach\Traits\Singleton;
-use Mach\Api\Rules;
-use Mach\Api\RuleSetStatus;
-use Mach\Api\TestFlightId;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit();
+
+use MachStyle\Traits\Singleton;
+use MachStyle\Api\Rules;
+use MachStyle\Api\RuleSetStatus;
+use MachStyle\Api\TestFlightId;
+use MachStyle\Menu\AdminBar;
+use MachStyle\Menu\Settings;
 
 /**
  * Plugin class to initialize the plugin.
@@ -20,8 +25,8 @@ class Plugin {
 	 * Constructor for the Plugin class.
 	 */
 	protected function __construct() {
-		AdminMenu::get_instance();
-		Menu::get_instance();
+		AdminBar::get_instance();
+		Settings::get_instance();
 		Rules::get_instance();
 		RuleSetStatus::get_instance();
 		TestFlightId::get_instance();

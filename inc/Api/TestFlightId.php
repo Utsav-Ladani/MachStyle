@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mach\Api;
+namespace MachStyle\Api;
 
-use Mach\Traits\Singleton;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit();
+
+use MachStyle\Traits\Singleton;
 
 use WP_Error;
 use WP_REST_Request;
@@ -18,9 +21,9 @@ class TestFlightId {
 
 	use Singleton;
 
-	const ROUTE_NAMESPACE      = 'mach/v1';
+	const ROUTE_NAMESPACE      = 'mach-style/v1';
 	const ROUTE_TEST_FLIGHT_ID = '/test-flight-id';
-	const OPTION_KEY           = 'mach_test_flight_id';
+	const OPTION_KEY           = 'mach_style_test_flight_id';
 	const PREFIX               = 'MACH-TF-';
 
 	/**

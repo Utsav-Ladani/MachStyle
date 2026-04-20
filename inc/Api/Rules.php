@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mach\Api;
+namespace MachStyle\Api;
 
-use Mach\Traits\Singleton;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit();
+
+use MachStyle\Traits\Singleton;
 
 use WP_Error;
 use WP_REST_Request;
@@ -18,10 +21,10 @@ class Rules {
 
 	use Singleton;
 
-	const ROUTE_NAMESPACE   = 'mach/v1';
+	const ROUTE_NAMESPACE   = 'mach-style/v1';
 	const ROUTE_RULES       = '/rules';
 	const ROUTE_COPY_RULES  = '/rules/copy';
-	const OPTION_KEY_PREFIX = 'mach_rule_';
+	const OPTION_KEY_PREFIX = 'mach_style_rule_';
 
 	/**
 	 * Constructor for the Rules class.

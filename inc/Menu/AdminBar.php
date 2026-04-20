@@ -2,27 +2,31 @@
 
 declare( strict_types=1 );
 
-namespace Mach;
+namespace MachStyle\Menu;
 
-use Mach\Api\RuleSetStatus;
-use Mach\Api\TestFlightId;
-use Mach\Traits\Singleton;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit();
+
+use MachStyle\Api\RuleSetStatus;
+use MachStyle\Api\TestFlightId;
+use MachStyle\Optimization;
+use MachStyle\Traits\Singleton;
 use WP_Admin_Bar;
 
 /**
- * AdminMenu class to handle admin menu.
+ * AdminBar class to handle admin bar menu.
  */
-class AdminMenu {
+class AdminBar {
 
 	use Singleton;
 
 	/**
 	 * Menu slug for the quick access link in the admin bar.
 	 */
-	const MENU_SLUG = 'mach-quick-access';
+	const MENU_SLUG = 'mach-style-quick-access';
 
 	/**
-	 * Constructor for the AdminMenu class.
+	 * Constructor for the AdminBar class.
 	 */
 	protected function __construct() {
 		add_action( 'admin_bar_menu', array( $this, 'register_admin_bar_menu' ), 100 );
@@ -42,14 +46,14 @@ class AdminMenu {
 			return;
 		}
 
-		// Parent menu item for Mach.
+		// Parent menu item for MachStyle.
 		$admin_bar->add_menu(
 			array(
 				'id'    => self::MENU_SLUG,
-				'title' => esc_html__( 'Mach', 'mach' ),
-				'href'  => admin_url( 'options-general.php?page=mach-settings' ),
+				'title' => esc_html__( 'MachStyle', 'mach-style' ),
+				'href'  => admin_url( 'options-general.php?page=mach-style-settings' ),
 				'meta'  => array(
-					'title' => esc_html__( 'Mach Quick Access Menu', 'mach' ),
+					'title' => esc_html__( 'MachStyle Quick Access Menu', 'mach-style' ),
 				),
 			)
 		);
@@ -76,10 +80,10 @@ class AdminMenu {
 			array(
 				'id'     => self::MENU_SLUG . '-open',
 				'parent' => self::MENU_SLUG,
-				'title'  => esc_html__( 'Open in Test Flight', 'mach' ),
+				'title'  => esc_html__( 'Open in Test Flight', 'mach-style' ),
 				'href'   => $test_flight_url,
 				'meta'   => array(
-					'title' => esc_html__( 'Open this page in Test Flight', 'mach' ),
+					'title' => esc_html__( 'Open this page in Test Flight', 'mach-style' ),
 				),
 			)
 		);

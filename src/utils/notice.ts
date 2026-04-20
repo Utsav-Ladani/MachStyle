@@ -1,7 +1,7 @@
 import { dispatch } from '@wordpress/data';
 import { store as noticeStore } from '@wordpress/notices';
 
-const ID = 'mach';
+const ID = 'mach-style';
 
 export const createNotice = (
 	message: string,

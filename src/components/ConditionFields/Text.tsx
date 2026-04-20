@@ -25,7 +25,7 @@ export const Text = ( { condition, setCondition }: TextProps ) => {
 			__nextHasNoMarginBottom
 			__next40pxDefaultSize
 			label={ CONDITION_LABELS[ condition.type ] }
-			placeholder={ __( 'Enter value', 'mach' ) }
+			placeholder={ __( 'Enter value', 'mach-style' ) }
 			value={ condition.value }
 			onChange={ ( newValue ) => {
 				const sanitizedValue = newValue

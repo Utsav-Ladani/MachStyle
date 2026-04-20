@@ -37,7 +37,7 @@ export const RulesList = () => {
 	const fields: Field< Rule >[] = [
 		{
 			id: 'condition',
-			label: __( 'Condition', 'mach' ),
+			label: __( 'Condition', 'mach-style' ),
 			enableGlobalSearch: true,
 			enableSorting: false,
 			getValue: ( args ) =>
@@ -48,7 +48,7 @@ export const RulesList = () => {
 		},
 		{
 			id: 'styleHandles',
-			label: __( 'Style Handles', 'mach' ),
+			label: __( 'Style Handles', 'mach-style' ),
 			enableGlobalSearch: true,
 			enableSorting: false,
 			render: ( { item }: { item: Rule } ) => (
@@ -60,8 +60,8 @@ export const RulesList = () => {
 	const actions: Action< Rule >[] = [
 		{
 			id: 'edit',
-			label: __( 'Edit', 'mach' ),
-			modalHeader: () => __( 'Edit Rule', 'mach' ),
+			label: __( 'Edit', 'mach-style' ),
+			modalHeader: () => __( 'Edit Rule', 'mach-style' ),
 			RenderModal: ( { items, closeModal, onActionPerformed } ) => {
 				const rule = items[ 0 ];
 
@@ -76,8 +76,8 @@ export const RulesList = () => {
 		},
 		{
 			id: 'delete',
-			label: __( 'Delete', 'mach' ),
-			modalHeader: () => __( 'Delete Rule', 'mach' ),
+			label: __( 'Delete', 'mach-style' ),
+			modalHeader: () => __( 'Delete Rule', 'mach-style' ),
 			RenderModal: ( { items, closeModal, onActionPerformed } ) => {
 				const rule = items[ 0 ];
 

@@ -16,11 +16,17 @@ type PostTypeProps = {
 
 export const PostType = ( { condition, setCondition }: PostTypeProps ) => {
 	const options = [
-		{ value: '', label: __( 'Select Post Type', 'mach' ), disabled: true },
-		...window.MACH_SETTINGS_DATA.availablePostTypes.map( ( postType ) => ( {
-			value: postType,
-			label: postType,
-		} ) ),
+		{
+			value: '',
+			label: __( 'Select Post Type', 'mach-style' ),
+			disabled: true,
+		},
+		...window.MACH_STYLE_SETTINGS_DATA.availablePostTypes.map(
+			( postType ) => ( {
+				value: postType,
+				label: postType,
+			} )
+		),
 	];
 
 	return (

@@ -14,16 +14,19 @@ export const TestTab = () => {
 	return (
 		<div className="p-6">
 			<RulesetToggle
-				label={ __( 'Enable Optimization For Test Flight', 'mach' ) }
+				label={ __(
+					'Enable Optimization For Test Flight',
+					'mach-style'
+				) }
 				help={ __(
 					'Turn this on to enable optimizations for test flights.',
-					'mach'
+					'mach-style'
 				) }
 			/>
 			<TestFlightStatus />
 			<Flex align="center" justify="space-between" className="mt-6 mb-4">
 				<h2 className="text-xl text-gray-700 m-0">
-					{ __( 'Active Optimization Rules', 'mach' ) }
+					{ __( 'Active Optimization Rules', 'mach-style' ) }
 				</h2>
 				<Flex align="center" gap="2" className="w-fit">
 					<Button
@@ -31,7 +34,7 @@ export const TestTab = () => {
 						variant="primary"
 						onClick={ () => setIsOpen( true ) }
 					>
-						{ __( 'Add New Rule', 'mach' ) }
+						{ __( 'Add New Rule', 'mach-style' ) }
 					</Button>
 					<CopyRulesButton />
 				</Flex>

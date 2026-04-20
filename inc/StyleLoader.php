@@ -2,9 +2,12 @@
 
 declare( strict_types=1 );
 
-namespace Mach;
+namespace MachStyle;
 
-use Mach\Traits\Singleton;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit();
+
+use MachStyle\Traits\Singleton;
 
 /**
  * StyleLoader class to initialize the plugin.
