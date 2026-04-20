@@ -20,6 +20,7 @@ class Rules {
 
 	const ROUTE_NAMESPACE   = 'mach/v1';
 	const ROUTE_RULES       = '/rules';
+	const ROUTE_COPY_RULES  = '/rules/copy';
 	const OPTION_KEY_PREFIX = 'mach_rule_';
 
 	/**
@@ -225,6 +226,30 @@ class Rules {
 				),
 			),
 		);
+
+		register_rest_route(
+			self::ROUTE_NAMESPACE,
+			self::ROUTE_COPY_RULES,
+			array(
+				array(
+					'methods'             => WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'copy_rules' ),
+					'permission_callback' => array( $this, 'permission_check' ),
+					'args'                => array(
+						'source_ruleset' => array(
+							'required' => true,
+							'type'     => 'string',
+							'enum'     => array( 'live', 'test' ),
+						),
+						'target_ruleset' => array(
+							'required' => true,
+							'type'     => 'string',
+							'enum'     => array( 'live', 'test' ),
+						),
+					),
+				),
+			),
+		);
 	}
 
 	/**
@@ -353,5 +378,30 @@ class Rules {
 		update_option( $option_key, $updated_rules );
 
 		return rest_ensure_response( $id );
+	}
+
+	/**
+	 * Copy all rules from a source ruleset and replace rules in a target ruleset.
+	 *
+	 * @param WP_REST_Request $request The REST request object containing source and target ruleset IDs.
+	 *
+	 * @return WP_REST_Response|WP_Error REST response containing the copied rules or WP_Error on failure.
+	 */
+	public function copy_rules( WP_REST_Request $request ): WP_REST_Response|WP_Error {
+		$source_ruleset = $request->get_param( 'source_ruleset' );
+		$target_ruleset = $request->get_param( 'target_ruleset' );
+
+		if ( $source_ruleset === $target_ruleset ) {
+			return new WP_Error( 'invalid_ruleset', 'Source and target rulesets must be different', array( 'status' => 400 ) );
+		}
+
+		$source_option_key = self::OPTION_KEY_PREFIX . $source_ruleset;
+		$target_option_key = self::OPTION_KEY_PREFIX . $target_ruleset;
+
+		$source_rules = get_option( $source_option_key, array() );
+
+		update_option( $target_option_key, $source_rules );
+
+		return rest_ensure_response( true );
 	}
 }

@@ -4,6 +4,7 @@ import { __ } from '@wordpress/i18n';
 
 import { RulesList } from '@/components/RulesList';
 import { ModalAddRule } from '@/components/ModalAddRule';
+import { CopyRulesButton } from '@/components/CopyRulesButton';
 import { RulesetToggle } from '@/components/RulesetToggle';
 import { TestFlightStatus } from '@/components/TestFlightStatus';
 
@@ -24,13 +25,16 @@ export const TestTab = () => {
 				<h2 className="text-xl text-gray-700 m-0">
 					{ __( 'Active Optimization Rules', 'mach' ) }
 				</h2>
-				<Button
-					__next40pxDefaultSize
-					variant="primary"
-					onClick={ () => setIsOpen( true ) }
-				>
-					{ __( 'Add New Rule', 'mach' ) }
-				</Button>
+				<Flex align="center" gap="2" className="w-fit">
+					<Button
+						__next40pxDefaultSize
+						variant="primary"
+						onClick={ () => setIsOpen( true ) }
+					>
+						{ __( 'Add New Rule', 'mach' ) }
+					</Button>
+					<CopyRulesButton />
+				</Flex>
 			</Flex>
 			<RulesList />
 			<ModalAddRule
