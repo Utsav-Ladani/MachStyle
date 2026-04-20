@@ -6,7 +6,7 @@ You decide where this happens using simple rules. For many sites, this can impro
 
 ## Screenshot
 
-<img width="1278" height="758" alt="MachStyle Settings Screenshot" src="https://github.com/user-attachments/assets/914cd6f8-7869-49dd-bcbb-47d83fbda4e3" />
+<img width="1278" height="758" alt="MachStyle Settings Screenshot" src="https://github.com/user-attachments/assets/a4c172fb-47c3-4b38-b641-b64ef6d75efa" />
 
 ## Quick Start
 
