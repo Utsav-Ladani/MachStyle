@@ -6,7 +6,7 @@ You decide where this happens using simple rules. For many sites, this can impro
 
 ## Screenshot
 
-![Mach Settings Screenshot Placeholder](./placeholder.png)
+<img width="1278" height="758" alt="Mach Settings Screenshot" src="https://github.com/user-attachments/assets/914cd6f8-7869-49dd-bcbb-47d83fbda4e3" />
 
 ## Quick Start
 
