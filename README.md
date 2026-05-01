@@ -61,6 +61,10 @@ Avoid deferring styles that control first-view layout:
 
 MachStyle is best used in small steps: test, measure, then roll out.
 
+## Development
+
+See [DEVELOPMENT.md](./DEVELOPMENT.md).
+
 ## Author
 
 - Name: Utsav Ladani

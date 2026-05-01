@@ -61,6 +61,15 @@ Avoid deferring styles that control first-view layout:
 * Checkout and cart critical styles
 * Any style that causes visible layout shifts when delayed
 
+== Development & Contribution ==
+
+MachStyle is open source and welcomes contributions!
+
+* **GitHub Repository**: https://github.com/Utsav-Ladani/MachStyle
+* **Report Issues**: https://github.com/Utsav-Ladani/MachStyle/issues
+* **Feature Requests**: https://github.com/Utsav-Ladani/MachStyle/issues
+* **Contribute Code**: Fork the repository and submit pull requests
+
 == Screenshots ==
 
 1. MachStyle Settings page with Test Flight and Live Settings tabs.
