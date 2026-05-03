@@ -36,11 +36,21 @@ Small, measured changes work best. Test, compare, then roll out.
 
 1. Open MachStyle and go to `Test Flight`.
 2. Add one rule for one page group, such as the home page, a post type, or a URL pattern.
-3. Add the style handles you want to defer.
+3. Add the style handles you want to defer. Use the Audit Panel to find style handles.
 4. Check the page on desktop and mobile.
 5. Run PageSpeed on the Test Flight URL and compare the result with your normal live URL.
 6. If the page looks correct and the metrics improve, copy the rules to `Live Settings`.
 7. Enable live optimization.
+
+== How to Use Audit Panel ==
+
+Audit Panel is a tool that helps you find style handles to defer.
+
+1. Open the frontend of your website and open Audit Panel from MachStyle menu in admin bar.
+2. Click on any stylesheet to temporarily remove its styling. This shows you what the page looks like for a fraction of second during load.
+3. Look at the top of your site. If it still looks readable and organized without that style, it's a great candidate to stay deferred.
+4. If the page looks messy or the header breaks, that style is important for the first impression. Click it again to turn it back on.
+5. Once finished, click **Copy Handles** button to get your optimized list and add it to your MachStyle settings.
 
 == What to Defer First ==
 
