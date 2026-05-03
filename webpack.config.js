@@ -22,6 +22,10 @@ export default {
 	entry: {
 		...defaultConfig.entry,
 		settings: path.resolve( import.meta.dirname, 'src/settings/index.tsx' ),
+		'audit-panel': path.resolve(
+			import.meta.dirname,
+			'src/audit-panel/index.tsx'
+		),
 	},
 	devServer: {
 		devMiddleware: { writeToDisk: true },
