@@ -4,7 +4,7 @@ Contributors: utsavladani
 Requires at least: 6.5
 Requires PHP: 8.1
 Tested up to: 6.9
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: performance, optimization, css, stylesheets, core web vitals
@@ -82,7 +82,9 @@ MachStyle is open source and welcomes contributions!
 
 == Screenshots ==
 
-1. MachStyle Settings page with Test Flight and Live Settings tabs.
+1. MachStyle Live Settings page
+2. MachStyle Test Flight page
+3. Audit Panel
 
 == FAQ ==
 
@@ -104,6 +106,10 @@ No. It changes when selected styles load on matching pages. The goal is to keep 
 
 == Changelog ==
 
+= 1.1.0 =
+
+* Added Audit Panel. It helps you find style handles to defer.
+
 = 1.0.0 =
 
 * Initial release.
@@ -117,3 +123,7 @@ No. It changes when selected styles load on matching pages. The goal is to keep 
 = 1.0.0 =
 
 Initial release of MachStyle.
+
+= 1.1.0 =
+
+* Added Audit Panel. It helps you find style handles to defer.
