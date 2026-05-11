@@ -1,6 +1,6 @@
 {
 	"name": "mach-style",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "A plugin to optimize site performance by conditionally deferring the loading of CSS styles.",
 	"author": "Utsav Ladani",
 	"license": "GPL-2.0-or-later",

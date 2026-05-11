@@ -4,7 +4,7 @@ Contributors: utsavladani
 Requires at least: 6.5
 Requires PHP: 8.1
 Tested up to: 6.9
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: performance, optimization, css, stylesheets, core web vitals
@@ -106,6 +106,10 @@ No. It changes when selected styles load on matching pages. The goal is to keep 
 
 == Changelog ==
 
+= 1.1.1 =
+
+* Minor bug fixes.
+
 = 1.1.0 =
 
 * Added Audit Panel. It helps you find style handles to defer.
@@ -120,10 +124,14 @@ No. It changes when selected styles load on matching pages. The goal is to keep 
 
 == Upgrade Notice ==
 
-= 1.0.0 =
+= 1.1.1 =
 
-Initial release of MachStyle.
+* Minor bug fixes.
 
 = 1.1.0 =
 
 * Added Audit Panel. It helps you find style handles to defer.
+
+= 1.0.0 =
+
+Initial release of MachStyle.
