@@ -18,7 +18,7 @@ export const StyleList = ( {
 	}
 
 	return (
-		<ul className="max-h-[400px] p-4 flex flex-col gap-2 bg-white m-0 list-none">
+		<ul className="max-h-[300px] p-4 flex flex-col gap-2 bg-white m-0 list-none overflow-y-auto">
 			{ styles.map( ( style ) => (
 				<StyleDeferralRow
 					key={ style.id }
