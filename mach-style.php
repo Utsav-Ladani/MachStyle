@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       MachStyle
  * Description:       Speed Up Your Site with Smarter Style Loading.
- * Version:           1.1.1
+ * Version:           1.1.2
  * Requires at least: 6.5
  * Requires PHP:      8.1
  * Author:            utsavladani

@@ -36,7 +36,6 @@ class Optimization {
 	 */
 	protected function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'prefill_deferred_styles' ) );
-		add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
 	}
 
 	/**
@@ -90,7 +89,7 @@ class Optimization {
 			return false;
 		}
 
-		$test_flight_id_from_query = get_query_var( self::TEST_FLIGHT_QUERY_VAR_NAME, '' );
+		$test_flight_id_from_query = filter_input( INPUT_GET, self::TEST_FLIGHT_QUERY_VAR_NAME, FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		$test_flight_id_from_db    = get_option( TestFlightId::OPTION_KEY, '' );
 
 		return (
@@ -119,19 +118,6 @@ class Optimization {
 	}
 
 	/**
-	 * Add query variables for test flight.
-	 *
-	 * @param array $query_vars Array of existing query variables.
-	 *
-	 * @return array Modified array of query variables.
-	 */
-	public function add_query_vars( $query_vars ) {
-		$query_vars[] = self::TEST_FLIGHT_QUERY_VAR_NAME;
-
-		return $query_vars;
-	}
-
-	/**
 	 * Extract deferred style handles from rules.
 	 *
 	 * @param array $rules Array of rules.
@@ -150,7 +136,7 @@ class Optimization {
 					$applied_rules[] = $rule;
 					break;
 				case 'home_page':
-					if ( is_home() ) {
+					if ( is_front_page() ) {
 						$applied_rules[] = $rule;
 					}
 					break;
